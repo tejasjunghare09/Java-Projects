@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -62,6 +63,13 @@ public class CandidateListServlet extends HttpServlet {
 			}
 		}
 		out.printf("Hello, %s (%s) <hr/>\n",userName, role);
+		
+		// get servlet context and retrieve announcement from it and display
+				ServletContext ctx = this.getServletContext();
+				String ann = (String) ctx.getAttribute("announcement");
+				if(ann != null)
+					out.println("<p style='color:red'> NOTE: " + ann + "</p>");
+		
 		out.println("<h2>Candidate List</h2>");
 		out.println("<form method='post' action='vote'>");
 		for(Candidate c : list) {
