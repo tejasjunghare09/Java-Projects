@@ -34,10 +34,21 @@ public class LoginServlet extends HttpServlet {
 			User dbUser = userDao.findByEmail(email);
 			// if login is successful, go to CandidateListServlet or ResultServlet
 			if(dbUser != null && dbUser.getPassword().equals(password)) {
-				if(dbUser.getRole().equals("admin"))
-					; // go to ResultServlet
-				else // if(dbUser.getRole().equals("voter"))
-					; // go to CandidateListServlet
+				// create cookie and add to response
+				Cookie c1 = new Cookie("uname", dbUser.getFirstName());
+				c1.setMaxAge(3600);
+				resp.addCookie(c1);
+				Cookie c2 = new Cookie("role", dbUser.getRole());
+				c2.setMaxAge(3600);
+				resp.addCookie(c2);
+				
+				if(dbUser.getRole().equals("admin")) {
+					resp.sendRedirect("result"); // go to ResultServlet
+					//RequestDispatcher rd = req.getRequestDispatcher("result");
+					//rd.forward(req, resp);
+				} else { // if(dbUser.getRole().equals("voter"))
+					resp.sendRedirect("candlist"); // go to CandidateListServlet
+				}
 			}
 			// if login is failed, show "Invalid Login"
 			else {
