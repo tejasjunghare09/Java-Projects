@@ -34,7 +34,7 @@ public class EditCandidateServlet extends HttpServlet {
 			Candidate c = candDao.findById(id);
 			if(c != null) {
 				out.println("<form method='post' action='editcand'>");
-				out.printf("Id: <input type='text' name='id' value='%d' readonly><br/>\n", c.getId());
+				out.printf("Id: <input type='hidden' name='id' value='%d' ><br/>\n", c.getId());
 				out.printf("Name: <input type='text' name='name' value='%s'><br/>\n", c.getName());
 				out.printf("Party: <input type='text' name='party' value='%s'><br/>\n", c.getParty());
 				out.printf("Votes: <input type='text' name='votes' value='%d' readonly><br/><br/>\n", c.getVotes());
