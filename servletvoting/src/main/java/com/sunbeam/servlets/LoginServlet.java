@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sunbeam.daos.UserDao;
 import com.sunbeam.daos.UserDaoImpl;
@@ -41,6 +42,9 @@ public class LoginServlet extends HttpServlet {
 				Cookie c2 = new Cookie("role", dbUser.getRole());
 				c2.setMaxAge(3600);
 				resp.addCookie(c2);
+				//store logged in user into session
+				HttpSession session = req.getSession();
+				session.setAttribute("curUser", dbUser);
 				
 				if(dbUser.getRole().equals("admin")) {
 					resp.sendRedirect("result"); // go to ResultServlet
