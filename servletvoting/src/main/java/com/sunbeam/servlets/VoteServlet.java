@@ -55,7 +55,13 @@ public class VoteServlet extends HttpServlet {
 				out.printf("Hello, %s (%s)<hr/>\n", userName, role);
 		out.println("<h2>Voting Status</h2>");
 		// retrieve current user from session
-				HttpSession session = req.getSession();
+				HttpSession session = req.getSession(false);
+				if(session == null) {
+					//if session timout/expire, then send user to login page or send session expired error
+					//resp.sendRedirect("index.html");
+					resp.sendError(440); //session expired error
+					return;
+				}
 				User user = (User) session.getAttribute("curUser");
 				// let user vote, if not already voted
 				if(user.getStatus() == 0) {
