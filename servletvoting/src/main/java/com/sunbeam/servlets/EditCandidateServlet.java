@@ -78,7 +78,16 @@ public class EditCandidateServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 		// forward req to result page
-		RequestDispatcher rd = req.getRequestDispatcher("result");
+		//RequestDispatcher rd = req.getRequestDispatcher("result");
+		ServletContext ctx = this.getServletContext();
+		RequestDispatcher rd = ctx.getRequestDispatcher("/result");
 		rd.forward(req, resp);
+		
+		/*
+		RequestDispatcher can be created using request as well as servlet context.
+		If it is created using req, it can be used to forward req to any page w.r.t. current req.
+		If it is created using servlet context, it can be used to forward req to any page in whole appln. 
+		*/
+		
 	}
 }
