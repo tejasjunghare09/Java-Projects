@@ -17,7 +17,6 @@ import com.sunbeam.entities.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		processRequest(req, resp);
@@ -26,62 +25,39 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		processRequest(req, resp);
 	}
-	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		
-		//get email and password from login page
+	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// get email and password from login page
 		String email = req.getParameter("email");
 		String password = req.getParameter("passwd");
-		//validate login against db records
-		try(UserDao userDao = new UserDaoImpl()){
+		// validate login against db records
+		try(UserDao userDao = new UserDaoImpl()) {
 			User dbUser = userDao.findByEmail(email);
-			//if login is successfull ,go to CandidateListServlet or ResultServlet
+			// if login is successful, go to CandidateListServlet or ResultServlet
 			if(dbUser != null && dbUser.getPassword().equals(password)) {
-				
-				//create cookie and add to response
-				Cookie c1 = new Cookie("uname" ,dbUser.getFirstName());
-				c1.setMaxAge(3600);
-				resp.addCookie(c1);
-				Cookie c2 = new Cookie("role", dbUser.getRole());
-				c2.setMaxAge(3600);
-				resp.addCookie(c2);
-			
-				if(dbUser.getRole().equals("admin")) { 
-					// go to ResultServlet
-					resp.sendRedirect("result");
-					//RequestDispatcher rd = req.getRequestDispatcher("result");
-					//rd.forward(req, resp);
-				}
-				else if(dbUser.getRole().equals("voter"))
-					
-					resp.sendRedirect("candlist");// go to CandidateListServlet
+				if(dbUser.getRole().equals("admin"))
+					; // go to ResultServlet
+				else // if(dbUser.getRole().equals("voter"))
+					; // go to CandidateListServlet
 			}
 			// if login is failed, show "Invalid Login"
-						else {
-							resp.setContentType("text/html");
-							PrintWriter out = resp.getWriter();
-							out.println("<html>");
-							out.println("<head>");
-							out.println("<title>Login</title>");
-							out.println("</head>");
-							out.println("<body>");
-							out.println("<h2>Login Failed</h2>");
-							out.println("<p>Sorry, Invalid email or password.</p>");
-							out.println("<p><a href='index.html'>Login Again</a></p>");
-							out.println("</body>");
-							out.println("</html>");
-						}
-
-
+			else {
+				resp.setContentType("text/html");
+				PrintWriter out = resp.getWriter();
+				out.println("<html>");
+				out.println("<head>");
+				out.println("<title>Login</title>");
+				out.println("</head>");
+				out.println("<body>");
+				out.println("<h2>Login Failed</h2>");
+				out.println("<p>Sorry, Invalid email or password.</p>");
+				out.println("<p><a href='index.html'>Login Again</a></p>");
+				out.println("</body>");
+				out.println("</html>");
+			}
 		}
-			
-		 catch (Exception e) {
+		catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
-		
-	
-	
-	
-	
-}
+	}
 }
