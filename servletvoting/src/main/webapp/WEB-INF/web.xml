@@ -19,4 +19,9 @@
   		<tracking-mode>COOKIE</tracking-mode>
   		
   </session-config>
+  
+  <context-param>
+	<param-name>app.title</param-name>
+	<param-value>Online Voting System</param-value>  
+  </context-param>
 </web-app>

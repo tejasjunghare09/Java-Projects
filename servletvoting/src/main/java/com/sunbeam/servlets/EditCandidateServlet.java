@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,12 @@ public class EditCandidateServlet extends HttpServlet {
 		out.println("<title>Edit</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+		// get app title from ctx param and display it
+				ServletContext app = this.getServletContext();
+				String appTitle = app.getInitParameter("app.title");
+				out.printf("<h1>%s</h1>", appTitle);
+		
 		out.println("<h2>Edit Candidate</h2>");
 		try(CandidateDao candDao = new CandidateDaoImpl()) {
 			Candidate c = candDao.findById(id);

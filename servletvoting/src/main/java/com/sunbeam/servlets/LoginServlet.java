@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -63,6 +64,12 @@ public class LoginServlet extends HttpServlet {
 				out.println("<title>Login</title>");
 				out.println("</head>");
 				out.println("<body>");
+				
+				// get app title from ctx param and display it
+				ServletContext app = this.getServletContext();
+				String appTitle = app.getInitParameter("app.title");
+				out.printf("<h1>%s</h1>", appTitle);
+				
 				out.println("<h2>Login Failed</h2>");
 				out.println("<p>Sorry, Invalid email or password.</p>");
 				out.println("<p><a href='index.html'>Login Again</a></p>");

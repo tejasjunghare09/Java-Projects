@@ -47,6 +47,12 @@ public class ResultServlet extends HttpServlet {
 				out.println("<title>Result</title>");
 				out.println("</head>");
 				out.println("<body>");
+				
+				// get app title from ctx param and display it
+				ServletContext app = this.getServletContext();
+				String appTitle = app.getInitParameter("app.title");
+				out.printf("<h1>%s</h1>", appTitle);
+				
 				// get user name and role from cookie and display it
 				Cookie[] arr = req.getCookies();
 				String userName = "", role = "";

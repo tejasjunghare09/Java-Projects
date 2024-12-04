@@ -3,6 +3,7 @@ package com.sunbeam.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -41,6 +42,12 @@ public class VoteServlet extends HttpServlet {
 		out.println("<title>Result</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+		// get app title from ctx param and display it
+		ServletContext app = this.getServletContext();
+		String appTitle = app.getInitParameter("app.title");
+		out.printf("<h1>%s</h1>", appTitle);
+		
 		// get user name and role from cookie and display it
 				Cookie[] arr = req.getCookies();
 				String userName = "", role = "";
