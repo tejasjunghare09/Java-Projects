@@ -64,6 +64,7 @@ public class EditCandidateServlet extends HttpServlet {
 		try(CandidateDao candDao = new CandidateDaoImpl()) {
 			int count = candDao.update(c);
 			String message = "Candidates updated: " + count;
+			req.setAttribute("msg", message);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

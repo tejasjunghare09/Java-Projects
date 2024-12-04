@@ -32,7 +32,7 @@ public class DeleteCandidateServlet extends HttpServlet {
 		try(CandidateDao canDao = new CandidateDaoImpl()){
 			int count = canDao.deleteById(id);
 			String message = "Candidates Deleted " + count ;
-			
+			req.setAttribute("msg", message);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
