@@ -6,30 +6,40 @@
 <title>Login Bean</title>
 </head>
 <body>
-	<jsp:useBean id="log" class="com.sunbeam.beans.LoginBean"/>
+	<jsp:useBean id="log" class="com.sunbeam.beans.LoginBean" scope="session"/>
 	<jsp:setProperty property="*" name="log"/>
 	
 	${log.login()}
-	
 	<c:choose>
-		<c:when test="${log.getSave() ==1 }">
-			Login Successfull !
-			
-		 <c:redirect url="candlist.jsp"/>
-        
-		</c:when>	
-		<c:otherwise>
-		Registration Failed. <br>
-		Try Again ! <br>
-			<script>
-            setTimeout(function() {
-                window.location.href = "index.jsp";
-            }, 3000); 
-        </script>	
-		</c:otherwise>
+		<c:when test="${log.user != null }">
 		
+			<c:choose>
+		<c:when test="${log.user.role == 'admin' }">
+				<c:redirect url="result.jsp" />
+		
+		</c:when>
+		<c:otherwise>
+				<c:redirect  url="candlist.jsp"/>
+		</c:otherwise>
+			
+	</c:choose>
+		
+		</c:when>
+		
+		<c:otherwise>
+				<h2>Login Failed</h2>
+				<p>
+					<a href="index.jsp"> Login Again</a>
+				</p>
+				
+				
+				
+				
+		</c:otherwise>
 	
 	</c:choose>
+	
+	
 
 </body>
 </html>
