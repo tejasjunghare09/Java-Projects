@@ -38,5 +38,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<p>${param.msg}</p>
+	<p>
+	<a href="logout.jsp">Sign Out</a>
+	</p> 
 </body>
 </html>
