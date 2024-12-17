@@ -44,6 +44,16 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+	@Override
+	public ApiResponse deleteProduct(Long productId) {
+		if(productDao.existsById(productId)) {
+			productDao.deleteById(productId);
+			return new ApiResponse("Deleted Product Details Successfully !");
+		}
+		return new ApiResponse("Invalid Product Id !!!");
+	}
+
+
 
 	
 	
