@@ -16,9 +16,9 @@ public class ProductReqDTO {
 	
 	private double price;
 	
-	private int quantity;
 	
 	
-	private boolean isDeleted; 
+	private boolean status=false ;
+	private int stock;
 	
 }

@@ -8,7 +8,7 @@ import com.ecom.dto.ProductRespDTO;
 
 public interface ProductService {
 
-	List<ProductRespDTO> getAllProducts();
-	ApiResponse addNewProduct(ProductReqDTO user);
-	ApiResponse deleteProduct(Long productId);
+	List<ProductRespDTO> getAllAvailableProducts();
+	ApiResponse addNewProduct(ProductReqDTO user,Long userId);
+	ApiResponse deleteProduct(Long userId,Long productId);
 }

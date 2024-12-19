@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Table(name = "products")
-@ToString(callSuper = true)  //exclude
+@ToString(callSuper = true)  
 public class Product extends BaseEntity{
 	
 	@Column(name = "product_name" ,length = 50)
@@ -22,11 +22,13 @@ public class Product extends BaseEntity{
 	private String description;
 	@Column( length = 10,nullable = false )
 	private double price;
-	@Column(length = 10)
-	private int quantity;
 	
+	
+	
+	@Column(length = 20)
+	private int stock;
 	@Column(name = "is_deleted")
-	private boolean isDeleted; 
+	private boolean status;
 	
 	
 	

@@ -3,6 +3,7 @@ package com.ecom.pojos;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +15,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Order extends BaseEntity{
 
 	
 	private double totalAmount;
 	
 	private int quantity;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id" ,nullable = false)
@@ -33,10 +36,13 @@ public class Order extends BaseEntity{
 
 	public Order(double totalAmount, int quantity) {
 		super();
+		System.out.println("Cons oRder called");
 		this.totalAmount = totalAmount;
 		this.quantity = quantity;
 		
+		
 	}
+	
 	
 	
 	

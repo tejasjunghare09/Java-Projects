@@ -44,7 +44,7 @@ Requirements
 @Getter 
 @Setter
 @Table(name = "users")
-@ToString(callSuper = true)  //exclude check
+@ToString(callSuper = true ,exclude = "password")  //exclude check
 public class User extends BaseEntity{
 	
 	@Column(name = "first_name" , length = 30)
@@ -61,9 +61,7 @@ public class User extends BaseEntity{
 	@Column(length = 30)
 	private UserRole userRole;
 	
-//	User 1------>* Order
-	@OneToMany(mappedBy = "userOrder" ,cascade = CascadeType.ALL ,orphanRemoval = true) 
-	private List<Order> orders = new ArrayList<>();
+
 	
 	public User(String firstName, String lastName, String email, String password, LocalDate dob, UserRole userRole) {
 		super();
